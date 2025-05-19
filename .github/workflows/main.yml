@@ -25,6 +25,6 @@ jobs:
       - name: Sync ArgoCD Application
         run: |
           curl -X POST https://argocd.procopan.md/api/v1/applications/dotnet-app/sync \
-          - H  "Authorization: Bearer $ARGOCD_TOKEN" \
-          - H "Content-Type: application/json" \
-          - d '{"revision":"HEAD", "prune": false, "dryRun": false}'
+            -H "Authorization: Bearer $ARGOCD_TOKEN" \
+            -H "Content-Type: application/json" \
+            -d '{"revision":"HEAD", "prune": false, "dryRun": false}'
