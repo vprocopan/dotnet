@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
         - name: dotnet
-          image: vprocopan/dotnet:latest
+          image: vprocopan/dotnet:REPLACE_IMAGE_TAG
           ports:
             - containerPort: 8080
