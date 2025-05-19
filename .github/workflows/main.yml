@@ -25,10 +25,22 @@ jobs:
       - name: Replace image tag in manifests
         run: |
           sed -i "s|REPLACE_IMAGE_TAG|${{ github.sha }}|g" k8s/deployment.yaml        
-      
-      - name: Sync ArgoCD Application
+
+      - name: Commit and push changes
         run: |
-          curl -X POST https://argo.procopan.md/api/v1/applications/dotnet-app/sync \
-            -H "Authorization: Bearer $ARGOCD_TOKEN" \
-            -H "Content-Type: application/json" \
-            -d '{"revision":"HEAD", "prune": false, "dryRun": false}'
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git commit -am "Update image tag to ${{ github.sha }}"
+          git push
+
+      - name: Install ArgoCD CLI
+        run: |
+          curl -sSL -o argocd https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64
+          chmod +x argocd
+          sudo mv argocd /usr/local/bin/
+
+      
+      - name: Login and sync
+        run: |
+          argocd login argo.procopan.md --username admin --password "${{ secrets.ARGOCD_PASSWORD }}" --insecure
+          argocd app sync dotnet-app
