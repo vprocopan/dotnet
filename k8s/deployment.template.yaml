@@ -1,0 +1,11 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dotnet
+spec:
+  template:
+    spec:
+      containers:
+        - name: dotnet
+          image: vprocopan/dotnet:REPLACE_IMAGE_TAG
+          imagePullPolicy: Always
