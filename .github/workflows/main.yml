@@ -67,4 +67,4 @@ jobs:
       - name: 🔐 Login & Sync
         run: |
           argocd login argo.procopan.md --username admin --password "${{ secrets.ARGOCD_PASSWORD }}" --insecure
-          argocd app sync dotnet-app --force
+          argocd app sync dotnet-app --force --replace
