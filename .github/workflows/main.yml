@@ -38,8 +38,11 @@ jobs:
       - name: 📥 Checkout code
         uses: actions/checkout@v3
 
-      - name: ✏️ Update image tag in Kubernetes manifest
-        run: sed -i "s|REPLACE_IMAGE_TAG|${{ needs.build.outputs.image_tag }}|g" k8s/deployment.yaml
+      - name: ✏️ Generate updated deployment.yaml
+        run: |
+          cp k8s/deployment.template.yaml k8s/deployment.yaml
+          sed -i "s|REPLACE_IMAGE_TAG|${{ needs.build.outputs.image_tag }}|g" k8s/deployment.yaml
+
 
       - name: ✅ Commit & push
         env:
