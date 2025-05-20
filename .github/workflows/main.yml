@@ -18,7 +18,7 @@ jobs:
 
       - name: 🧠 Set image tag
         id: set_tag
-        run: echo "image_tag=build-${GITHUB_RUN_NUMBER}" >> "$GITHUB_OUTPUT"
+        run: echo "image_tag=build-${{ github.run_number }}" >> $GITHUB_OUTPUT
 
       - name: 🔐 Login to Docker Hub
         run: echo "${{ secrets.DOCKER_TOKEN }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
