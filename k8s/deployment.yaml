@@ -1,22 +1,11 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: dotnet-deployment
-  labels:
-    app: dotnet
+  name: dotnet
 spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: dotnet
   template:
-    metadata:
-      labels:
-        app: dotnet
     spec:
       containers:
         - name: dotnet
-          image: vprocopan/dotnet:build-23
+          image: vprocopan/dotnet:build-26
           imagePullPolicy: Always
-          ports:
-            - containerPort: 8080
