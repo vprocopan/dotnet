@@ -7,5 +7,5 @@ spec:
     spec:
       containers:
         - name: dotnet
-          image: vprocopan/dotnet:build-26
+          image: vprocopan/dotnet:build-27
           imagePullPolicy: Always
