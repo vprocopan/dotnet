@@ -3,9 +3,16 @@ kind: Deployment
 metadata:
   name: dotnet
 spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dotnet
   template:
+    metadata:
+      labels:
+        app: dotnet
     spec:
       containers:
         - name: dotnet
-          image: vprocopan/dotnet:build-27
+          image: vprocopan/dotnet:build-28
           imagePullPolicy: Always
